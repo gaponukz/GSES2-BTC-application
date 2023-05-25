@@ -24,19 +24,29 @@ export default class Router {
         this.queryParser = new QueryParser()
     }
 
-    rateRouter(request: Request, response: Response) {
+    async rateRouter(request: Request, response: Response) {
         this.rateExporter.getCurrentPrice("btc").then((price: number) => {
             response.send(price.toString())
         })
     }
     
-    subscribeRouter(request: Request, response: Response) {
+    async subscribeRouter(request: Request, response: Response) {
         const user = User.fromObject(this.queryParser.parse(['gmail'], request))
+        const users = await this.storage.getAll()
 
-        response.send(`${user.gmail} added`)
+        if (users.find(_user => _user.gmail === user.gmail)) {
+            response.status(400)
+            response.send('Already in subscribed')
+
+        } else {
+            await this.storage.create(user)
+            response.send(`Added`)
+        }
     }
     
-    sendEmailsRouter(request: Request, response: Response) {
-        response.send("Sended")
+    async sendEmailsRouter(request: Request, response: Response) {
+        this.observer.notify(this.storage, this.rateExporter).then(() => {
+            response.send("Sended")
+        })
     }
 }
