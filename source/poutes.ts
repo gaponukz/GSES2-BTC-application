@@ -4,7 +4,7 @@ import { IObserverService } from './logic/observers'
 import { IRateExporter } from './logic/rateExporters'
 import { User } from './logic/enteties'
 
-import { IRequestParser, QueryParser, HeadersParser } from './requestParser'
+import { IRequestParser, QueryParser } from './requestParser'
 
 export default class Router {
     private readonly storage: IRepository<User>
