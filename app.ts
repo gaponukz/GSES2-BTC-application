@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from 'express'
 import { ConsoleObserverService } from './source/logic/observers'
-import { MemoryRateExporter } from './source/logic/rateExporters'
+import { MemoryRateExporter, CoingeckoExporter } from './source/logic/rateExporters'
 import { UserMemoryRepository } from './source/logic/repositories'
 import Router from './source/poutes'
 
@@ -9,7 +9,7 @@ const app: Express = express()
 
 const router = new Router(
     new UserMemoryRepository(),
-    new MemoryRateExporter(),
+    new CoingeckoExporter(),
     new ConsoleObserverService()
 )
 

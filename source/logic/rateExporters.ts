@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 type supportedSymbols = "btc"
 
 export interface IRateExporter {
@@ -9,5 +11,23 @@ export class MemoryRateExporter implements IRateExporter {
         return new Promise<number>((resolve, reject) => {
             resolve(74.01)
         })
+    }
+}
+
+
+export class CoingeckoExporter implements IRateExporter {
+    private readonly apiUrl = 'https://api.coingecko.com/api/v3/simple/price'
+    private readonly ids = 'bitcoin'
+    private readonly vsCurrencies = 'uah'
+
+    async getCurrentPrice(symbol: supportedSymbols): Promise<number> {
+        const response = await axios.get(this.apiUrl, {
+            params: {
+                ids: this.ids,
+                vs_currencies: this.vsCurrencies,
+            },
+        })
+
+        return response.data[this.ids][this.vsCurrencies]
     }
 }
