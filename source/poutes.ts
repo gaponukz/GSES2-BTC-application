@@ -11,7 +11,6 @@ export default class Router {
     private readonly rateExporter: IRateExporter
     private readonly observer: IObserverService
     private queryParser: IRequestParser
-    private headersParser: IRequestParser
 
     constructor (
         storage: IRepository<User>,
@@ -23,7 +22,6 @@ export default class Router {
         this.observer = observer
 
         this.queryParser = new QueryParser()
-        this.headersParser = new HeadersParser()
     }
 
     rateRouter(request: Request, response: Response) {
