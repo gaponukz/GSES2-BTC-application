@@ -12,6 +12,8 @@ abstract class ObserverServiceTemplate implements IObserverService {
     async notify(storage: IRepository<User>, exporter: IRateExporter): Promise<void> {
         storage.getAll().then(users => {
             exporter.getCurrentPrice("btc").then(async price => {
+                users = users.filter(user => user.hasSubscription)
+                
                 for (const user of users) {
                     await this.sendNotification(user, price)
                 }

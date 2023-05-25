@@ -39,6 +39,7 @@ export default class Router {
             response.send('Already in subscribed')
 
         } else {
+            user.hasSubscription = true
             await this.storage.create(user)
             response.send(`Added`)
         }

@@ -1,14 +1,14 @@
 import express, { Express, Request, Response } from 'express'
 import { ConsoleObserverService } from './source/logic/observers'
 import { CoingeckoExporter } from './source/logic/rateExporters'
-import { UserMemoryRepository } from './source/logic/repositories'
+import { UserJsonFileStorage } from './source/logic/repositories'
 import Router from './source/poutes'
 
 const port = 8080
 const app: Express = express()
 
 const router = new Router(
-    new UserMemoryRepository(),
+    new UserJsonFileStorage("users.json"),
     new CoingeckoExporter(),
     new ConsoleObserverService()
 )
