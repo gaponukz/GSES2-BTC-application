@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from 'express'
 import { ConsoleObserverService } from './source/logic/observers'
-import { MemoryRateExporter, CoingeckoExporter } from './source/logic/rateExporters'
+import { CoingeckoExporter } from './source/logic/rateExporters'
 import { UserMemoryRepository } from './source/logic/repositories'
 import Router from './source/poutes'
 

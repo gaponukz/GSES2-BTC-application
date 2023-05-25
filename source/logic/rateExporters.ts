@@ -14,20 +14,20 @@ export class MemoryRateExporter implements IRateExporter {
     }
 }
 
-
 export class CoingeckoExporter implements IRateExporter {
     private readonly apiUrl = 'https://api.coingecko.com/api/v3/simple/price'
-    private readonly ids = 'bitcoin'
     private readonly vsCurrencies = 'uah'
+    private availableCurrencies: Record<supportedSymbols, string> = {"btc": "bitcoin"}
 
     async getCurrentPrice(symbol: supportedSymbols): Promise<number> {
+        const currency = this.availableCurrencies[symbol]
         const response = await axios.get(this.apiUrl, {
             params: {
-                ids: this.ids,
+                ids: currency,
                 vs_currencies: this.vsCurrencies,
             },
         })
 
-        return response.data[this.ids][this.vsCurrencies]
+        return response.data[currency][this.vsCurrencies]
     }
 }
