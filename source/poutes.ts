@@ -27,6 +27,10 @@ export default class Router {
     async rateRouter(request: Request, response: Response) {
         this.rateExporter.getCurrentPrice("btc").then((price: number) => {
             response.send(price.toString())
+
+        }).catch(() => {
+            response.status(400)
+            response.send("Invalid status value")
         })
     }
     
@@ -35,19 +39,19 @@ export default class Router {
         const users = await this.storage.getAll()
 
         if (users.find(_user => _user.gmail === user.gmail)) {
-            response.status(400)
-            response.send('Already in subscribed')
+            response.status(409)
+            response.send('')
 
         } else {
             user.hasSubscription = true
             await this.storage.create(user)
-            response.send(`Added`)
+            response.send(`E-mail додано`)
         }
     }
     
     async sendEmailsRouter(request: Request, response: Response) {
         this.observer.notify(this.storage, this.rateExporter).then(() => {
-            response.send("Sended")
+            response.send("E-mailʼи відправлено")
         })
     }
 }
