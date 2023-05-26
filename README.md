@@ -17,15 +17,18 @@ gmail=user@gmail.com
 gmailPassword=userpassowrf123
 ```
 
-## Installation
-Install files from repo
+## Deploying
+### From git (locally)
 ```bash
 git clone https://github.com/gaponukz/GSES2-BTC-application.git
 cd https://github.com/gaponukz/GSES2-BTC-application.git
+npm install
+npm install -g ts-node
+ts-node app.ts
 ```
 
-Run
+### From docker
 ```bash
-docker build -t btcapp .
-docker run -d -p 8080:8080 --rm btcapp
+docker pull gaponukz/btcapp
+docker run -d -p 8080:8080 --rm --env-file .env gaponukz/btcapp 
 ```
