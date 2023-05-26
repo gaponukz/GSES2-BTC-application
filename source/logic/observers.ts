@@ -8,7 +8,7 @@ export interface IObserverService {
     notify(storage: IRepository<User>, exporter: IRateExporter): Promise<void>
 }
 
-abstract class ObserverServiceTemplate implements IObserverService {
+export abstract class ObserverServiceTemplate implements IObserverService {
     abstract sendNotification(user: User, price: number): Promise<void>
 
     async notify(storage: IRepository<User>, exporter: IRateExporter): Promise<void> {

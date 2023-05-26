@@ -20,7 +20,7 @@ export default class Router {
         this.storage = storage
         this.rateExporter = rateExporter
         this.observer = observer
-
+        
         this.queryParser = new QueryParser()
     }
 
