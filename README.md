@@ -16,3 +16,16 @@ Before usge you need to create `.env` file:
 gmail=user@gmail.com
 gmailPassword=userpassowrf123
 ```
+
+## Installation
+Install files from repo
+```bash
+git clone https://github.com/gaponukz/GSES2-BTC-application.git
+cd https://github.com/gaponukz/GSES2-BTC-application.git
+```
+
+Run
+```bash
+docker build -t btcapp .
+docker run -d -p 8080:8080 --rm btcapp
+```
