@@ -16,11 +16,7 @@ Before usge you need to create `.env` file:
 gmail=user@gmail.com
 gmailPassword=userpassowrf123
 ```
-And in `Dockerfile` file:
-```dockerfile
-ENV gmail user@gmail.com
-ENV gmailPassword userpassword123
-```
+
 ## Deploying
 ### From git (locally)
 ```bash
@@ -30,9 +26,9 @@ npm install
 npm install -g ts-node
 ts-node app.ts
 ```
+
 ### From docker
-Run
 ```bash
 docker pull gaponukz/btcapp
-docker run -d -p 8080:8080 --rm gaponukz/btcapp 
+docker run -d -p 8080:8080 --rm --env-file .env gaponukz/btcapp 
 ```
